@@ -14,10 +14,12 @@ namespace ElsieFour
             }
         }
         private int[] key;
+        public State state;
 
         public ElsieFour()
         {
             this.key = GenerateKey();
+            state = new State(this.key);
         }
         public ElsieFour(string tKey)
         {
