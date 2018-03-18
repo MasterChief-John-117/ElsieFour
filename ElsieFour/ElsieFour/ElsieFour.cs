@@ -19,6 +19,10 @@ namespace ElsieFour
         {
             this.key = GenerateKey();
         }
+        public ElsieFour(string tKey)
+        {
+            this.key = ConvertStringToKey(tKey);
+        }
         public ElsieFour(int[] k)
         {
             this.key = k;
