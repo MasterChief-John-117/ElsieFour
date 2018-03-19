@@ -91,5 +91,35 @@ namespace ElsieFour
             }
             return temp;
         }
+
+        public string Encrypt(string plain)
+        {
+            foreach(char chr in plain.ToLower())
+            {
+                char thisChar = chr;
+                if(!Alphabet.Contains(thisChar))
+                {
+                    if (thisChar == '1') thisChar = '_';
+                    else if (thisChar == '0') thisChar = '#';
+                    else if (thisChar == ' ') thisChar = '_';
+                    else throw new Exception("Input contains illegal character");
+                }
+                int r = 0, c = 0;
+                for(r = 0; r < 6; r++)
+                {
+                    for(c = 0; c < 6; c++)
+                    {
+                        if (Alphabet[state.matrix[r, c]].Equals(thisChar))
+                            goto MATCH;
+                    }
+                }
+                MATCH:
+                Console.WriteLine($"R: {r}, C: {c}");
+                int x = (r + (state.matrix[state.i, state.j] / 6)) % 6;
+                int y = (r + (state.matrix[state.i, state.j] % 6)) % 6;
+
+            }
+            return "";
+        }
     }
 }
