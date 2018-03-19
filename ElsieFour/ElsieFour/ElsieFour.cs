@@ -25,10 +25,12 @@ namespace ElsieFour
         public ElsieFour(string tKey)
         {
             this.key = ConvertStringToKey(tKey);
+            state = new State(this.key);
         }
         public ElsieFour(int[] k)
         {
             this.key = k;
+            state = new State(this.key);
         }
 
         public int[] GenerateKey()
