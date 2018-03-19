@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 
@@ -35,12 +36,17 @@ namespace ElsieFour
             key = new int[36];
             int[] temp = new int[36];
             RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider();
-            for (int i = 0; i < 36; i++)
+            HashSet<int> uniquePos = new HashSet<int>();
+            while(uniquePos.Count != 36)
             {
                 byte[] bytes = new byte[4];
                 crypto.GetNonZeroBytes(bytes);
                 int rand = Math.Abs(BitConverter.ToInt32(bytes, 0)) % 36;
-                temp[i] = rand;
+                uniquePos.Add(rand);
+            }
+            for(int i = 0; i < 36; i++)
+            {
+                temp[i] = uniquePos.ElementAt(i);
             }
             return temp;
         }
@@ -60,6 +66,10 @@ namespace ElsieFour
             if (input.Length != 36)
             {
                 throw new Exception("Input is not in the correct format");
+            }
+            if (input.ToCharArray().Distinct().Count() != 36)
+            {
+                throw new Exception("Input contains non-unique characters");
             }
             int[] temp = new int[36];
             for (int i = 0; i < 36; i++)
